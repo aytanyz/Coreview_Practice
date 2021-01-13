@@ -53,7 +53,34 @@ namespace StudentGrade
             return result;
         }
 
-        public string Name;
+        public string Name { get; set; }
+
+        // Below after constructor you cannot modify Name
+            // public string Name { get; private set;}
+        // Or using readonly. Only constractor or variable initializer can change value
+            // readonly string Name = "Science";
+        // const cannot be modified even from constractor  
+            // const string MY_CONST = "sjhdj";  
+
+        /*
+        // long way of writing get/set
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                if(!String.IsNullOrEmpty(value))
+                {
+                    name = value;
+                }
+            }
+        } 
+        private string name;        
+        */
         private Dictionary<string, double> courseGrade = new Dictionary<string, double>();
     }
 }
