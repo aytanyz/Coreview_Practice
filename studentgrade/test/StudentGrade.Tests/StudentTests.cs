@@ -3,10 +3,10 @@ using Xunit;
 
 namespace StudentGrade.Tests
 {
-    public class UnitTest1
+    public class StudentTests
     {
         [Fact]
-        public void Test1()
+        public void TestGetStatistics()
         {
             //arrange
             var student = new Student("");

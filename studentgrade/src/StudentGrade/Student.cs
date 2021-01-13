@@ -46,7 +46,7 @@ namespace StudentGrade
             return result;
         }
 
-        private string Name;
+        public string Name;
         private Dictionary<string, double> courseGrade = new Dictionary<string, double>();
     }
 }
