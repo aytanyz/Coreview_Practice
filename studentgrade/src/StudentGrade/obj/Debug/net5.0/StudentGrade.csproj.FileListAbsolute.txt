@@ -1,0 +1,16 @@
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\bin\Debug\net5.0\StudentGrade.exe
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\bin\Debug\net5.0\StudentGrade.deps.json
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\bin\Debug\net5.0\StudentGrade.runtimeconfig.json
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\bin\Debug\net5.0\StudentGrade.runtimeconfig.dev.json
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\bin\Debug\net5.0\StudentGrade.dll
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\bin\Debug\net5.0\ref\StudentGrade.dll
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\bin\Debug\net5.0\StudentGrade.pdb
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\obj\Debug\net5.0\StudentGrade.csprojAssemblyReference.cache
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\obj\Debug\net5.0\StudentGrade.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\obj\Debug\net5.0\StudentGrade.AssemblyInfoInputs.cache
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\obj\Debug\net5.0\StudentGrade.AssemblyInfo.cs
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\obj\Debug\net5.0\StudentGrade.csproj.CoreCompileInputs.cache
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\obj\Debug\net5.0\StudentGrade.dll
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\obj\Debug\net5.0\ref\StudentGrade.dll
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\obj\Debug\net5.0\StudentGrade.pdb
+C:\Users\ayten\Desktop\Coreview\studentgrade\src\StudentGrade\obj\Debug\net5.0\StudentGrade.genruntimeconfig.cache
