@@ -13,7 +13,14 @@ namespace StudentGrade
 
         public void AddGrade(string courseName, double grade)
         {
-            courseGrade.Add(courseName, grade);
+            if(grade>=0 && grade<=100)
+            {
+                courseGrade.Add(courseName, grade);
+            }
+            else
+            {
+                throw new ArgumentException($"Invalid grade");
+            }
         }
 
         public void PrintGrades()

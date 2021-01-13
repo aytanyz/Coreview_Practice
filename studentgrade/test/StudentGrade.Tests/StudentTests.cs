@@ -10,9 +10,35 @@ namespace StudentGrade.Tests
         {
             //arrange
             var student = new Student("");
-            student.AddGrade("Math", 20);
-            student.AddGrade("Info", 14);
-            student.AddGrade("Chemistry", 19);
+
+            try
+            {                    
+                student.AddGrade("Math", 20);
+                student.AddGrade("Info", 14);
+                student.AddGrade("Chemistry", 19);
+            }
+            /*
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            */
+            catch(ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            catch(FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            // it happens even if there appear any exception 
+            finally
+            {
+                Console.WriteLine("****");
+            }
             
             //act
             var result = student.GetStatistics();
