@@ -9,7 +9,7 @@ namespace StudentGrade.Tests
         public void TestGetStatistics()
         {
             //arrange
-            var student = new Student("");
+            var student = new InMemoryStudent("");
 
             try
             {                    

@@ -18,9 +18,9 @@ namespace StudentGrade.Tests
             Assert.Equal(student_1.Name, "New Name");
         }
 
-        private void GetNameSetNameRef( ref Student student, string name)
+        private void GetNameSetNameRef( ref InMemoryStudent student, string name)
         {
-            student = new Student(name);
+            student = new InMemoryStudent(name);
         }
 
         /*---------------------------------------------------------------------*/[Fact]
@@ -36,9 +36,9 @@ namespace StudentGrade.Tests
             Assert.Equal(student_1.Name, "Aytan");
         }
 
-        private void GetNameSetName(Student student, string name)
+        private void GetNameSetName(InMemoryStudent student, string name)
         {
-            student = new Student(name);
+            student = new InMemoryStudent(name);
         }
 
         /*---------------------------------------------------------------------*/
@@ -55,7 +55,7 @@ namespace StudentGrade.Tests
             Assert.Equal(student_1.Name, "New Name");
         }
 
-        private void SetName(Student student, string name)
+        private void SetName(InMemoryStudent student, string name)
         {
             student.Name = name;
         }
@@ -92,9 +92,9 @@ namespace StudentGrade.Tests
             Assert.True(Object.ReferenceEquals(student_1, student_2));
         }
 
-        Student GetStudent(string name)
+        InMemoryStudent GetStudent(string name)
         {
-            return new Student(name);
+            return new InMemoryStudent(name);
         }
     }
 }
