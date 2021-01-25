@@ -7,11 +7,10 @@ namespace WEBApi
 {
     public class DrinkManager
     {
-        public List<Drink> Drinks { get; set; }
-        private int ID = 0;
+        private int _id;
         public DrinkManager()
         {
-            Drinks = new List<Drink>();
+            _id = 1;
         }
 
         public void AddDrink(string drinkName, int aviableAmount, double drinkPrice)
@@ -20,14 +19,15 @@ namespace WEBApi
             drink.DrinkName = drinkName;
             drink.AviableAmount = aviableAmount;
             drink.DrinkPrice = drinkPrice;
-            drink.DrinkId = ID;
-            ID++;
-            Drinks.Add(drink);
+            drink.DrinkId = _id;            
+            TempDB.drinks.Add(drink);
+
+            _id++;
         }
 
         public bool CheckDrink(int drinkId)
         {
-            foreach (var drink in Drinks)
+            foreach (var drink in TempDB.drinks)
             {
                 if (drink.DrinkId == drinkId)
                     return true;
@@ -40,7 +40,7 @@ namespace WEBApi
             //fix this method
             try
             {
-                foreach (var drink in Drinks)
+                foreach (var drink in TempDB.drinks)
                 {
                     if (drink.DrinkId == drinkId)
                         return drink;

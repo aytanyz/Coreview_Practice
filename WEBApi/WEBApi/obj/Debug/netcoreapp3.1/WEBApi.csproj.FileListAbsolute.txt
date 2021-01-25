@@ -21,3 +21,7 @@ C:\Users\ayten\Desktop\Coreview\WEBApi\WEBApi\obj\Debug\netcoreapp3.1\WEBApi.gen
 C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\obj\Debug\netcoreapp3.1\WEBApi.csproj.CopyComplete
+C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll

@@ -5,18 +5,21 @@ using System.Threading.Tasks;
 
 namespace WEBApi
 {
-    public class TempDB
+    public static class TempDB
     {
-        public List<Drink> drinks;
+        public static List<Drink> drinks;
+        public static DrinkManager drinkManager;
 
-        public TempDB()
+        static TempDB()
         {
             drinks = new List<Drink>();
-            drinks.Add(new Drink ( "Italian coffee", 100, 2.50 ));
-            drinks.Add(new Drink ("American coffee", 90, 2.00));
-            drinks.Add(new Drink ("Tea", 100, 1.50));
-            drinks.Add(new Drink ("Tea", 80, 1.30));
-            drinks.Add(new Drink("Chocolate", 100, 2.00));
+            drinkManager = new DrinkManager();
+
+            drinkManager.AddDrink("Italian coffee", 100, 2.50 );
+            drinkManager.AddDrink ("American coffee", 90, 2.00);
+            drinkManager.AddDrink ("Tea", 100, 1.50);
+            drinkManager.AddDrink ("Tea", 80, 1.30);
+            drinkManager.AddDrink("Chocolate", 100, 2.00);
         }
     }
 }
