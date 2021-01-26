@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WEBApi.Models;
 
 namespace WEBApi
 {
@@ -10,7 +11,7 @@ namespace WEBApi
         private int _id;
         public DrinkManager()
         {
-            _id = 1;
+            _id = 0;
         }
 
         public void AddDrink(string drinkName, int aviableAmount, double drinkPrice)

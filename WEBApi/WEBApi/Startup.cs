@@ -10,6 +10,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using WEBApi.Models;
+using MongoDB.Driver;
+using Microsoft.Extensions.Options;
+using WEBApi.Services;
 
 namespace WEBApi
 {
@@ -26,6 +31,18 @@ namespace WEBApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<DrinkContext>(opt =>
+                                               opt.UseInMemoryDatabase("DrinkList"));
+            // for MongoDB
+            services.Configure<DrinksDatabaseSettings>(
+                Configuration.GetSection(nameof(DrinksDatabaseSettings)));
+
+            services.AddSingleton<IDrinksDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<DrinksDatabaseSettings>>().Value);
+            
+            services.AddSingleton<DrinkService>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

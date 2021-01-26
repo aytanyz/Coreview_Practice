@@ -12,6 +12,7 @@ using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
 using HttpPutAttribute = Microsoft.AspNetCore.Mvc.HttpPutAttribute;
 using HttpDeleteAttribute = Microsoft.AspNetCore.Mvc.HttpDeleteAttribute;
+using WEBApi.Models;
 
 namespace WEBApi.Controllers
 {
@@ -40,9 +41,10 @@ namespace WEBApi.Controllers
                 throw new HttpResponseException(System.Net.HttpStatusCode.BadRequest);
             }         
         }
+        
 
         [HttpGet("id/{drinkId}")]
-        public List<Drink> GetDrink(int drinkId)
+        public List<Drink> GetDrinkById(int drinkId)
         {
 
             var result = new List<Drink>();
@@ -145,23 +147,24 @@ namespace WEBApi.Controllers
                 return TempDB.drinks[editedDrinkId];
 
             }
-            catch (Exception)
+            catch
             {
                 throw new HttpResponseException(System.Net.HttpStatusCode.NotFound);
             }
         }
 
         [HttpDelete("id/{drinkId}")]
-        public List<Drink> DeleteDrink(int drinkId)
+        public Drink DeleteDrink(int drinkId)
         {
             try
             {
-                if (!TempDB.drinkManager.CheckDrink(drinkId))
-                    return null;
-                // return BadRequest("There is no such a drink to delete!");
-
                 Drink item = TempDB.drinks.Single(x => x.DrinkId == drinkId);
+
+                if(item == null)
+                    throw new HttpResponseException(System.Net.HttpStatusCode.NotFound);
+
                 TempDB.drinks.Remove(item);
+                return item;
 
                 /*for (int i = 0; i < TempDB.drinks.Count(); i++)
                 {
@@ -169,13 +172,10 @@ namespace WEBApi.Controllers
                         TempDB.drinks.RemoveAt(i);
                 }*/
 
-                return null;
-
             }
-            catch (Exception)
+            catch
             {
-
-                throw;
+                throw new HttpResponseException(System.Net.HttpStatusCode.BadRequest);
             }
         }
 
