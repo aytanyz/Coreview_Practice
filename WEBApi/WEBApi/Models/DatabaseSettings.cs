@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace WEBApi.Models
 {
-    public class DrinksDatabaseSettings : IDrinksDatabaseSettings
+    public class DatabaseSettings : IDatabaseSettings
     {
-        public string DrinksCollectionName { get; set; }
+        public List<string> CollectionName { get; set; }
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
     }
 
-    public interface IDrinksDatabaseSettings
+    public interface IDatabaseSettings
     {
-        string DrinksCollectionName { get; set; }
+        List<string> CollectionName { get; set; }
         string ConnectionString { get; set; }
         string DatabaseName { get; set; }
     }

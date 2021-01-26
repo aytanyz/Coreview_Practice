@@ -31,18 +31,17 @@ namespace WEBApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<DrinkContext>(opt =>
-                                               opt.UseInMemoryDatabase("DrinkList"));
-            // for MongoDB
-            services.Configure<DrinksDatabaseSettings>(
-                Configuration.GetSection(nameof(DrinksDatabaseSettings)));
 
-            services.AddSingleton<IDrinksDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<DrinksDatabaseSettings>>().Value);
+
+            // for MongoDB
+            services.Configure<DatabaseSettings>(
+                Configuration.GetSection(nameof(DatabaseSettings)));
+
+            services.AddSingleton<IDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
             
             services.AddSingleton<DrinkService>();
-
-
+            services.AddSingleton<DiscountCodeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

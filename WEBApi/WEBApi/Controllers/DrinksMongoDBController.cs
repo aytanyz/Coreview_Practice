@@ -61,14 +61,14 @@ namespace WEBApi.Controllers
 		[HttpDelete("{id:length(24)}")]
 		public IActionResult Delete(string id)
 		{
-			var book = _drinkService.GetDrinkById(id);
+			var drink = _drinkService.GetDrinkById(id);
 
-			if (book == null)
+			if (drink == null)
 			{
 				return NotFound();
 			}
 
-			_drinkService.RemoveById(book.Id);
+			_drinkService.RemoveById(drink.Id);
 
 			return NoContent();
 		}

@@ -11,12 +11,12 @@ namespace WEBApi.Services
     {
         private readonly IMongoCollection<Drink> _drinks;
 
-        public DrinkService(IDrinksDatabaseSettings settings)
+        public DrinkService(IDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
-            _drinks = database.GetCollection<Drink>(settings.DrinksCollectionName);
+            _drinks = database.GetCollection<Drink>(settings.CollectionName[0]);
         }
 
         public List<Drink> GetAllDrinks() =>
