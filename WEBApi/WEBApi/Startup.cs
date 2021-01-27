@@ -40,8 +40,10 @@ namespace WEBApi
             services.AddSingleton<IDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
             
+            // collections
             services.AddSingleton<DrinkService>();
             services.AddSingleton<DiscountCodeService>();
+            services.AddSingleton<OrderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
