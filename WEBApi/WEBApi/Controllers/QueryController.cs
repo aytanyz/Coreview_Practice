@@ -94,7 +94,7 @@ namespace WEBApi.Controllers
                               .OrderBy(e => e.DrinkName)
                               .ToList();
 
-            var query2 = from order in orders
+            /*var query2 = from order in orders
                          join drink in drinks
                              on order.OrderedDrink.DrinkId equals drink.Id
                          orderby drink.DrinkName
@@ -103,12 +103,12 @@ namespace WEBApi.Controllers
                              order.OrderId,
                              drink.DrinkName,
                              order.OrderedDrink.NumbersOfDrink
-                         );
+                         );*/
 
-            if (query2 == null)
+            if (query == null)
                 return NotFound();
 
-            return query2.ToList();
+            return query.ToList();
         }
 
 
@@ -118,14 +118,14 @@ namespace WEBApi.Controllers
         {
             var orders = _orderService.GetAllOrders()
                                        .TakeDrinksFromOrder()
-                                       .Select(e => e)
-                                       .GroupBy(e => e.OrderedDrink.DrinkId, e => e)
+                                       .GroupBy(e => e.OrderedDrink.DrinkId)
+                                       .OrderBy(g => g.Key)
                                        .ToList();
 
             if (orders == null)
                 return NotFound();
 
-            return NoContent();
+            return orders;
         }
 
     }
