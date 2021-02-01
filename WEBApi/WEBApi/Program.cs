@@ -13,13 +13,7 @@ namespace WEBApi
     {
         public static void Main(string[] args)
         {
-            /*DrinkManager drinks = new DrinkManager();
-            drinks.AddDrink("Italian coffee", 100, 2.50);
-            drinks.AddDrink("American coffee", 90, 2.00);
-            drinks.AddDrink("Tea", 100, 1.50);
-            drinks.AddDrink("Chocolate", 100, 2.00);*/
-
-
+            var readFile = new ReadDiscountCodesFromCSV();
             CreateHostBuilder(args).Build().Run();
         }
 

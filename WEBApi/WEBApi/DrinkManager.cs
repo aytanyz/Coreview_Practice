@@ -14,11 +14,11 @@ namespace WEBApi
             _id = 0;
         }
 
-        public void AddDrink(string drinkName, int aviableAmount, double drinkPrice)
+        public void AddDrink(string drinkName, int aviableNumbersOfDrink, double drinkPrice)
         {
             Drink drink = new Drink();
             drink.DrinkName = drinkName;
-            drink.AviableAmount = aviableAmount;
+            drink.AviableNumbersOfDrink = aviableNumbersOfDrink;
             drink.DrinkPrice = drinkPrice;
             drink.DrinkId = _id;            
             TempDB.drinks.Add(drink);

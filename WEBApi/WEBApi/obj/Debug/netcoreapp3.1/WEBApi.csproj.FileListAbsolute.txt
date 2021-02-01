@@ -6,7 +6,6 @@ C:\Users\ayten\Desktop\Coreview\WEBApi\WEBApi\bin\Debug\netcoreapp3.1\WEBApi.run
 C:\Users\ayten\Desktop\Coreview\WEBApi\WEBApi\bin\Debug\netcoreapp3.1\WEBApi.runtimeconfig.dev.json
 C:\Users\ayten\Desktop\Coreview\WEBApi\WEBApi\bin\Debug\netcoreapp3.1\WEBApi.dll
 C:\Users\ayten\Desktop\Coreview\WEBApi\WEBApi\bin\Debug\netcoreapp3.1\WEBApi.pdb
-C:\Users\ayten\Desktop\Coreview\WEBApi\WEBApi\obj\Debug\netcoreapp3.1\WEBApi.csprojAssemblyReference.cache
 C:\Users\ayten\Desktop\Coreview\WEBApi\WEBApi\obj\Debug\netcoreapp3.1\WEBApi.AssemblyInfoInputs.cache
 C:\Users\ayten\Desktop\Coreview\WEBApi\WEBApi\obj\Debug\netcoreapp3.1\WEBApi.AssemblyInfo.cs
 C:\Users\ayten\Desktop\Coreview\WEBApi\WEBApi\obj\Debug\netcoreapp3.1\WEBApi.csproj.CoreCompileInputs.cache
@@ -230,3 +229,4 @@ C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\Microsoft.
 C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Configuration.dll
 C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Console.dll
 C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\obj\Debug\netcoreapp3.1\WEBApi.csprojAssemblyReference.cache

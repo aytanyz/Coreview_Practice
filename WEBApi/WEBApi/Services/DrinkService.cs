@@ -16,7 +16,7 @@ namespace WEBApi.Services
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
-            _drinks = database.GetCollection<Drink>(settings.CollectionName[0]);
+            _drinks = database.GetCollection<Drink>("Drinks");
         }
 
         public List<Drink> GetAllDrinks() =>
@@ -25,19 +25,30 @@ namespace WEBApi.Services
         public Drink GetDrinkById(string id) =>
             _drinks.Find<Drink>(drink => drink.Id == id).FirstOrDefault();
 
-        public Drink Create(Drink drink)
+        public Drink CreateDrink(Drink drink)
         {
             _drinks.InsertOne(drink);
             return drink;
         }
 
-        public void Update(string id, Drink newDrink) =>
+        public void UpdateDrink(string id, Drink newDrink) =>
             _drinks.ReplaceOne(drink => drink.Id == id, newDrink);
 
-        public void RemoveByDrink(Drink drinkToDelete) =>
-            _drinks.DeleteOne(drink => drink.Id == drinkToDelete.Id);
+        public void DecreaseDrinkAviabilityInStock(string id, int amount)
+        {
+            var drink = GetDrinkById(id);
+            drink.AviableNumbersOfDrink -= amount;
+            _drinks.ReplaceOne(drink => drink.Id == id, drink);
+        }
 
-        public void RemoveById(string id) =>
+        public void IncreaseDrinkAviabilityInStock(string id, int amount)
+        {
+            var drink = GetDrinkById(id);
+            drink.AviableNumbersOfDrink += amount;
+            _drinks.ReplaceOne(drink => drink.Id == id, drink);
+        }
+
+        public void RemoveDrinkById(string id) =>
             _drinks.DeleteOne(drink => drink.Id == id);
     }
 }

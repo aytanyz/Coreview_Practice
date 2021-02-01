@@ -16,7 +16,7 @@ namespace WEBApi.Services
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
-            _orders = database.GetCollection<Order>(settings.CollectionName[2]);
+            _orders = database.GetCollection<Order>("Orders");
         }
 
         public List<Order> GetAllOrders() =>
@@ -25,19 +25,16 @@ namespace WEBApi.Services
         public Order GetOrderById(string id) =>
             _orders.Find<Order>(order => order.Id == id).FirstOrDefault();
 
-        public Order Create(Order order)
+        public Order CreateOrder(Order order)
         {
             _orders.InsertOne(order);
             return order;
         }
 
-        public void Update(string id, Order newOrder) =>
+        public void UpdateOrder(string id, Order newOrder) =>
             _orders.ReplaceOne(order => order.Id == id, newOrder);
 
-        public void RemoveByOrder(Order orderToDelete) =>
-            _orders.DeleteOne(order => order.Id == orderToDelete.Id);
-
-        public void RemoveById(string id) =>
+        public void RemoveOrderById(string id) =>
             _orders.DeleteOne(order => order.Id == id);
     }
 }

@@ -17,7 +17,7 @@ namespace WEBApi.Services
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
-            _discountCodes = database.GetCollection<DiscountCode>(settings.CollectionName[1]);
+            _discountCodes = database.GetCollection<DiscountCode>("DiscountCodes");
         }
 
         public List<DiscountCode> GetAllDiscountCodes() =>

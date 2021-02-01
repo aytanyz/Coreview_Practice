@@ -15,19 +15,18 @@ namespace WEBApi.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public int DrinkId { get; set; }
-        //[BsonElement("Name")]
         public string DrinkName { get; set; }
-        public int AviableAmount { get; set; }
+        public int AviableNumbersOfDrink { get; set; }
         public double DrinkPrice { get; set; }
 
         public Drink()
         {
 
         }
-        public Drink(string drinkName, int aviableAmount, double price)
+        public Drink(string drinkName, int aviableNumbersOfDrink, double price)
         {
             DrinkName = drinkName;
-            AviableAmount = aviableAmount;
+            AviableNumbersOfDrink = aviableNumbersOfDrink;
             DrinkPrice = price;
             //DrinkId = Guid.NewGuid();
         }
