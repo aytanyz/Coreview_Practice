@@ -16,7 +16,7 @@ namespace WEBApi.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public List<OrderedDrink> OrderedDrinks { get; set; }
-        public DateTime Date { get; private set; } 
+        public DateTime Date { get; private set; }
         public Status OrderStatus { get; set; }
         public string DiscountCodeId { get; set; }
         public bool DiscountCodeUsed

@@ -30,7 +30,7 @@ namespace WEBApi.Controllers
                                       .Where(d => d.AviableNumbersOfDrink < amount)
                                       .ToList();
 
-            if (drinks == null)
+            if (drinks.Count==0)
                 return NotFound();
 
             return drinks;
@@ -46,13 +46,13 @@ namespace WEBApi.Controllers
                                       .FilterByDate(date)
                                       .ToList();
 
-            if (orders == null)
+            if (orders.Count == 0)
                 return NotFound();
 
             return orders;
         }
                 
-        [HttpGet("orders/drinks from orders")]
+        [HttpGet("orders/drinks_from_orders")]
         public ActionResult<List<DrinksFromOrder>> PrintDrinksFromOrders()
         {
             var orders = _orderService.GetAllOrders()
@@ -61,26 +61,26 @@ namespace WEBApi.Controllers
                                        .OrderByDescending(e => e.OrderedDrink.DrinkId)
                                        .ToList();
 
-            if (orders == null)
+            if (orders.Count == 0)
                 return NotFound();
 
             return orders;
         }
 
-        [HttpGet("orders/drinks from orders SelectMany")]
+        [HttpGet("orders/drinks_from_orders_selectmany")]
         public ActionResult<List<OrderedDrink>> PrintDrinksFromOrdersWithSelectMany()
         {
             var orders = _orderService.GetAllOrders()
                                       .SelectMany( order => order.OrderedDrinks)
                                       .ToList();
 
-            if (orders == null)
+            if (orders.Count == 0)
                 return NotFound();
 
             return orders;
         }
 
-        [HttpGet("orders/by drink name")]
+        [HttpGet("orders/by_drink_name")]
         public ActionResult<IEnumerable<DrinksFromOrderByName>> PrintDrinksByNameFromOrder()
         {
             var orders = _orderService.GetAllOrders()
@@ -114,15 +114,38 @@ namespace WEBApi.Controllers
                              order.OrderedDrink.NumbersOfDrink
                          );*/
 
-            if (query == null)
+            if (query.Count == 0)
                 return NotFound();
 
             return query;
         }
 
         //-------------Not printing in the browser--------------------------
-        [HttpGet("orders/total numbers of order from each drink")]
-        public ActionResult<List<OrderedDrink>> TotalNumbersOfOrderFromEachDrink()
+        [HttpGet("orders/groupbydrink")]
+        public ActionResult<IEnumerable<IGrouping<string, OrderedDrink>>> PrintGroupByDrinksFromOrder()
+        {
+            var orders = _orderService.GetAllOrders()
+                                       .SelectMany(o => o.OrderedDrinks)
+                                       .GroupBy(o => o.DrinkId)
+                                       .OrderBy(g => g.Key);
+
+            /*foreach (var order in orders)
+            {
+                Console.WriteLine(order.Key);
+                foreach (var drink in order)
+                    Console.WriteLine(drink.NumbersOfDrink);
+            }*/
+
+            if (orders.ToList().Count == 0)
+                return NotFound();
+
+            return NoContent();
+        }
+
+        //-------------Not printing in the browser--------------------------
+        [HttpGet("orders/totalnumbersoforderfromeachdrink")]
+        //public ActionResult<List<(string, int)>> TotalNumbersOfOrderFromEachDrink()
+        public ActionResult<List<(string, int)>> TotalNumbersOfOrderFromEachDrink()
         {
             var orders = _orderService.GetAllOrders()
                                       .SelectMany(e => e.OrderedDrinks)
@@ -142,46 +165,21 @@ namespace WEBApi.Controllers
                               .Select(g =>
                                             {
                                                 var result = g.Aggregate(new DrinkStatistic(), (e, c) => e.FindTotal(c));
-                                                return new
-                                                {
-                                                    Name = g.Key,
-                                                    NumbersOfTotalOrder = result.Total
-                                                };
+                                                (string Name, int Total) drinkList = (g.Key, result.Total);
+                                                return drinkList;
                                             })
-                              .OrderByDescending(r => r.NumbersOfTotalOrder).ToList();
+                              .OrderByDescending(r => r.Total)
+                              .ToList();
 
             foreach (var order in query)
             {
-                Console.WriteLine(order.Name + " : " + order.NumbersOfTotalOrder);
+                Console.WriteLine(order.Name + " : " + order.Total);
             }
 
-            if (query == null)
+            if (query.Count == 0)
                 return NotFound();
 
-            return NoContent();
-        }
-
-
-        //-------------Not printing in the browser--------------------------
-        [HttpGet("orders/groupbydrink")]
-        public ActionResult<IEnumerable<IGrouping<string, OrderedDrink>>> PrintGroupByDrinksFromOrder()
-        {
-            var orders = _orderService.GetAllOrders()
-                                       .SelectMany(o => o.OrderedDrinks)
-                                       .GroupBy(o => o.DrinkId)
-                                       .OrderBy(g => g.Key);
-
-            /*foreach (var order in orders)
-            {
-                Console.WriteLine(order.Key);
-                foreach (var drink in order)
-                    Console.WriteLine(drink.NumbersOfDrink);
-            }*/
-
-            if (orders == null)
-                return NotFound();
-
-            return NoContent();
+            return query;
         }
 
     }
