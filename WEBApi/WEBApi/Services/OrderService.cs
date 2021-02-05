@@ -7,34 +7,34 @@ using WEBApi.Models;
 
 namespace WEBApi.Services
 {
-    public class OrderService
+    public class OrderService : IServiceRepository<Order>
     {
         private readonly IMongoCollection<Order> _orders;
 
-        public OrderService(IDatabaseSettings settings)
+        public OrderService()
         {
-            var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
+            var client = new MongoClient("mongodb://localhost:27017");
+            var database = client.GetDatabase("MyDB");
 
             _orders = database.GetCollection<Order>("Orders");
         }
 
-        public List<Order> GetAllOrders() =>
+        public List<Order> GetAll() =>
             _orders.Find(order => true).ToList();
 
-        public Order GetOrderById(string id) =>
+        public Order GetById(string id) =>
             _orders.Find<Order>(order => order.Id == id).FirstOrDefault();
 
-        public Order CreateOrder(Order order)
+        public Order Create(Order order)
         {
             _orders.InsertOne(order);
             return order;
         }
 
-        public void UpdateOrder(string id, Order newOrder) =>
+        public void Update(string id, Order newOrder) =>
             _orders.ReplaceOne(order => order.Id == id, newOrder);
 
-        public void RemoveOrderById(string id) =>
-            _orders.DeleteOne(order => order.Id == id);
+        public void Remove(string id) =>
+            _orders.DeleteOne(order => order.Id == id);      
     }
 }

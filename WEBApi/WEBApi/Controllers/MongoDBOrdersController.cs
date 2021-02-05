@@ -12,8 +12,8 @@ namespace WEBApi.Controllers
     [ApiController]
     public class MongoDBOrdersController : ControllerBase
     {
-        private readonly OrderService _orderService;
-        private readonly DrinkService _drinkService;
+        private readonly IServiceRepository<Order> _orderService;
+        private readonly IServiceRepository<Drink> _drinkService;
 
         public MongoDBOrdersController(OrderService orderService, DrinkService drinkService)
         {
@@ -23,12 +23,12 @@ namespace WEBApi.Controllers
 
         [HttpGet]
         public ActionResult<List<Order>> GetAllOrders() =>
-            _orderService.GetAllOrders();
+            _orderService.GetAll();
 
         [HttpGet("{id:length(24)}", Name = "GetOrder")]
         public ActionResult<Order> Get(string id)
         {
-            var order = _orderService.GetOrderById(id);
+            var order = _orderService.GetById(id);
 
             if (order == null)
             {
@@ -39,7 +39,7 @@ namespace WEBApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Order> CreateOrder(Order order)
+        public ActionResult<Order> Create(Order order)
         {
             order.OrderStatus = Status.Created;
 
@@ -49,12 +49,14 @@ namespace WEBApi.Controllers
                 order.DiscountCodeUsed = false;
 
             // creating new order
-            _orderService.CreateOrder(order);
+            _orderService.Create(order);
 
             // we decrease the aviable number of ordered drinks in stock
             foreach (var drink in order.OrderedDrinks)
             {
-                _drinkService.DecreaseDrinkAviabilityInStock(drink.DrinkId, drink.NumbersOfDrink);
+                var drinkToEdit = _drinkService.GetById(drink.DrinkId);
+                drinkToEdit.AviableNumbersOfDrink -= drink.NumbersOfDrink;
+                _drinkService.Update(drink.DrinkId, drinkToEdit);
             }
 
             return CreatedAtRoute("GetOrder", new { id = order.Id.ToString() }, order);
@@ -63,14 +65,14 @@ namespace WEBApi.Controllers
         [HttpPut("{id:length(24)}")]
         public IActionResult Update(string id, Order newOrder)
         {
-            var book = _orderService.GetOrderById(id);
+            var book = _orderService.GetById(id);
 
             if (book == null)
             {
                 return NotFound();
             }
 
-            _orderService.UpdateOrder(id, newOrder);
+            _orderService.Update(id, newOrder);
 
             return NoContent();
         }
@@ -78,7 +80,7 @@ namespace WEBApi.Controllers
         [HttpDelete("{id:length(24)}/canceled")]
         public IActionResult CanceleOrder(string id)
         {
-            var order = _orderService.GetOrderById(id);
+            var order = _orderService.GetById(id);
 
             if (order == null)
             {
@@ -88,12 +90,14 @@ namespace WEBApi.Controllers
             // we increase aviable number of drink in stock as the order was deleted.
             foreach (var drink in order.OrderedDrinks)
             {
-                _drinkService.IncreaseDrinkAviabilityInStock(drink.DrinkId, drink.NumbersOfDrink);
+                var drinkToEdit = _drinkService.GetById(drink.DrinkId);
+                drinkToEdit.AviableNumbersOfDrink += drink.NumbersOfDrink;
+                _drinkService.Update(drink.DrinkId, drinkToEdit);
             }
 
             // _orderService.RemoveOrderById(order.Id);
             order.OrderStatus = Status.Canceled;
-            _orderService.UpdateOrder(id, order);
+            _orderService.Update(id, order);
 
             return NoContent();
         }
@@ -102,14 +106,14 @@ namespace WEBApi.Controllers
         [HttpDelete("{id:length(24)}")]
         public IActionResult DeleteOrder(string id)
         {
-            var order = _orderService.GetOrderById(id);
+            var order = _orderService.GetById(id);
 
             if (order == null)
             {
                 return NotFound();
             }
 
-            _orderService.RemoveOrderById(order.Id);
+            _orderService.Remove(order.Id);
 
             return NoContent();
         }

@@ -12,21 +12,19 @@ namespace WEBApi.Controllers
     [ApiController]
     public class QueryController : ControllerBase
     {
-        private readonly DrinkService _drinkService;
-        private readonly DiscountCodeService _discountCodeService;
-        private readonly OrderService _orderService;
+        private readonly IServiceRepository<Drink> _drinkService;
+        private readonly IServiceRepository<Order> _orderService;
 
-        public QueryController(DrinkService drinkService, DiscountCodeService discountCodeService, OrderService orderService)
+        public QueryController(DrinkService drinkService, OrderService orderService)
         {
             _drinkService = drinkService;
-            _discountCodeService = discountCodeService;
             _orderService = orderService;
         }
 
         [HttpGet("drinks/numberofaviableamount/lessthan/{amount}")]
         public ActionResult<List<Drink>> GetAllDrinks(int amount)
         {
-            var drinks = _drinkService.GetAllDrinks()
+            var drinks = _drinkService.GetAll()
                                       .Where(d => d.AviableNumbersOfDrink < amount)
                                       .ToList();
 
@@ -42,7 +40,7 @@ namespace WEBApi.Controllers
         {
             string date = day + "/" + month + "/" + year;
 
-            var orders = _orderService.GetAllOrders()
+            var orders = _orderService.GetAll()
                                       .FilterByDate(date)
                                       .ToList();
 
@@ -55,7 +53,7 @@ namespace WEBApi.Controllers
         [HttpGet("orders/drinks_from_orders")]
         public ActionResult<List<DrinksFromOrder>> PrintDrinksFromOrders()
         {
-            var orders = _orderService.GetAllOrders()
+            var orders = _orderService.GetAll()
                                        .TakeDrinksFromOrder()
                                        .Select(e => e)
                                        .OrderByDescending(e => e.OrderedDrink.DrinkId)
@@ -70,7 +68,7 @@ namespace WEBApi.Controllers
         [HttpGet("orders/drinks_from_orders_selectmany")]
         public ActionResult<List<OrderedDrink>> PrintDrinksFromOrdersWithSelectMany()
         {
-            var orders = _orderService.GetAllOrders()
+            var orders = _orderService.GetAll()
                                       .SelectMany( order => order.OrderedDrinks)
                                       .ToList();
 
@@ -83,11 +81,11 @@ namespace WEBApi.Controllers
         [HttpGet("orders/by_drink_name")]
         public ActionResult<IEnumerable<DrinksFromOrderByName>> PrintDrinksByNameFromOrder()
         {
-            var orders = _orderService.GetAllOrders()
+            var orders = _orderService.GetAll()
                                             .TakeDrinksFromOrder()
                                             .ToList();
 
-            var drinks = _drinkService.GetAllDrinks();
+            var drinks = _drinkService.GetAll();
 
 
             // start the query
@@ -124,7 +122,7 @@ namespace WEBApi.Controllers
         [HttpGet("orders/groupbydrink")]
         public ActionResult<IEnumerable<IGrouping<string, OrderedDrink>>> PrintGroupByDrinksFromOrder()
         {
-            var orders = _orderService.GetAllOrders()
+            var orders = _orderService.GetAll()
                                        .SelectMany(o => o.OrderedDrinks)
                                        .GroupBy(o => o.DrinkId)
                                        .OrderBy(g => g.Key);
@@ -141,17 +139,17 @@ namespace WEBApi.Controllers
 
             return NoContent();
         }
-
+/*
         //-------------Not printing in the browser--------------------------
         [HttpGet("orders/totalnumbersoforderfromeachdrink")]
         //public ActionResult<List<(string, int)>> TotalNumbersOfOrderFromEachDrink()
         public ActionResult<List<(string, int)>> TotalNumbersOfOrderFromEachDrink()
         {
-            var orders = _orderService.GetAllOrders()
+            var orders = _orderService.GetAll()
                                       .SelectMany(e => e.OrderedDrinks)
                                       .ToList();
 
-            var drinks = _drinkService.GetAllDrinks();
+            var drinks = _drinkService.GetAll();
 
             var query = orders.Join(drinks,
                                     o => o.DrinkId,
@@ -180,7 +178,7 @@ namespace WEBApi.Controllers
                 return NotFound();
 
             return query;
-        }
+        }*/
 
     }
 }

@@ -8,22 +8,22 @@ using WEBApi.Models;
 
 namespace WEBApi.Services
 {
-    public class DiscountCodeService
+    public class DiscountCodeService : IServiceRepository<DiscountCode>
     {
         private readonly IMongoCollection<DiscountCode> _discountCodes;
    
-        public DiscountCodeService(IDatabaseSettings settings)
+        public DiscountCodeService()
         {
-            var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
+            var client = new MongoClient("mongodb://localhost:27017");
+            var database = client.GetDatabase("MyDB");
 
             _discountCodes = database.GetCollection<DiscountCode>("DiscountCodes");
         }
 
-        public List<DiscountCode> GetAllDiscountCodes() =>
+        public List<DiscountCode> GetAll() =>
             _discountCodes.Find(discountCode => true).ToList();
 
-        public DiscountCode GetDiscountCodeById(string id) =>
+        public DiscountCode GetById(string id) =>
             _discountCodes.Find<DiscountCode>(discountCode => discountCode.Id == id).FirstOrDefault();
 
         public DiscountCode Create(DiscountCode discountCode)
@@ -35,10 +35,8 @@ namespace WEBApi.Services
         public void Update(string id, DiscountCode newDiscountCode) =>
             _discountCodes.ReplaceOne(discountCode => discountCode.Id == id, newDiscountCode);
 
-        public void RemoveByDiscountCode(DiscountCode discountCodeToDelete) =>
-            _discountCodes.DeleteOne(discountCode => discountCode.Id == discountCodeToDelete.Id);
-
-        public void RemoveById(string id) =>
+        public void Remove(string id) =>
             _discountCodes.DeleteOne(discountCode => discountCode.Id == id);
+
     }
 }

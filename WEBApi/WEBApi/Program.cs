@@ -13,7 +13,8 @@ namespace WEBApi
     {
         public static void Main(string[] args)
         {
-            var readFile = new ReadDiscountCodesFromCSV();
+            //var readFile = new ReadDiscountCodesFromCSV();
+
             CreateHostBuilder(args).Build().Run();
         }
 

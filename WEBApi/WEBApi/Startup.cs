@@ -41,7 +41,7 @@ namespace WEBApi
                 sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
             
             // collections
-            services.AddSingleton<DrinkService>();
+            services.AddSingleton<IDrinkService, DrinkService>();
             services.AddSingleton<DiscountCodeService>();
             services.AddSingleton<OrderService>();
         }

@@ -11,9 +11,9 @@ namespace WEBApi
     {
         public List<Drink> drinks;
 
-        public ReadDrinksFromCSV()
+        public ReadDrinksFromCSV(string path)
         {
-            drinks = ProcessFile("Files/Drinks.csv");
+            drinks = ProcessFile(path);
         }
 
         public List<Drink> ProcessFile(string path)

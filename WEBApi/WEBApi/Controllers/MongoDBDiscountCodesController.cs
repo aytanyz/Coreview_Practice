@@ -13,7 +13,7 @@ namespace WEBApi.Controllers
 	[ApiController]
 	public class MongoDBDiscountCodesController : ControllerBase
     {
-        private readonly DiscountCodeService _discountCodeService;
+        private readonly IServiceRepository<DiscountCode> _discountCodeService;
         
         public MongoDBDiscountCodesController(DiscountCodeService discountCodeService)
         {
@@ -22,13 +22,13 @@ namespace WEBApi.Controllers
 
 		[HttpGet]
 		public ActionResult<List<DiscountCode>> GetAllDrinks() =>
-			_discountCodeService.GetAllDiscountCodes();
+			_discountCodeService.GetAll();
 
 		//[HttpGet("{id:length(24)}", Name = "GetDrink")]
 		[HttpGet("{id}", Name = "GetDiscountCode")]
 		public ActionResult<DiscountCode> Get(string id)
 		{
-			var discountCode = _discountCodeService.GetDiscountCodeById(id);
+			var discountCode = _discountCodeService.GetById(id);
 
 			if (discountCode == null)
 			{
@@ -66,7 +66,7 @@ namespace WEBApi.Controllers
 		[HttpPut("{id:length(24)}")]
 		public IActionResult Update(string id, DiscountCode newDiscountCode)
 		{
-			var book = _discountCodeService.GetDiscountCodeById(id);
+			var book = _discountCodeService.GetById(id);
 
 			if (book == null)
 			{
@@ -81,14 +81,14 @@ namespace WEBApi.Controllers
 		[HttpDelete("{id:length(24)}")]
 		public IActionResult Delete(string id)
 		{
-			var discountCode = _discountCodeService.GetDiscountCodeById(id);
+			var discountCode = _discountCodeService.GetById(id);
 
 			if (discountCode == null)
 			{
 				return NotFound();
 			}
 
-			_discountCodeService.RemoveById(discountCode.Id);
+			_discountCodeService.Remove(discountCode.Id);
 
 			return NoContent();
 		}

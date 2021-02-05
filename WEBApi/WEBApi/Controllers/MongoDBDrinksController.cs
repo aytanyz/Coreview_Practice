@@ -11,20 +11,22 @@ namespace WEBApi.Controllers
 	[ApiController]
 	public class MongoDBDrinksController : ControllerBase
     {
-		private readonly DrinkService _drinkService;
-		public MongoDBDrinksController(DrinkService drinkService)
-		{
-			_drinkService = drinkService;	
+		private readonly IDrinkService _drinkService;			
+
+		public MongoDBDrinksController(IDrinkService drinkService)
+        {
+			_drinkService = drinkService;
+			//(IServiceRepository<Drink>)RepositoryFactory.GetRepository("drink");
 		}
 
 		[HttpGet]
 		public ActionResult<List<Drink>> GetAllDrinks() =>
-			_drinkService.GetAllDrinks();
+			_drinkService.GetAll();
 
 		[HttpGet("{id:length(24)}", Name = "GetDrink")]
 		public ActionResult<Drink> Get(string id)
 		{
-			var drink = _drinkService.GetDrinkById(id);
+			var drink = _drinkService.GetById(id);
 
 			if (drink == null)
 			{
@@ -37,7 +39,7 @@ namespace WEBApi.Controllers
 		[HttpPost]
 		public ActionResult<Drink> CreateDrink(Drink drink)
 		{
-			_drinkService.CreateDrink(drink);
+			_drinkService.Create(drink);
 			return CreatedAtRoute("GetDrink", new { id = drink.Id.ToString() }, drink);
 		}
 
@@ -45,12 +47,12 @@ namespace WEBApi.Controllers
 		[HttpPost("fromfile")]
 		public IActionResult AddFromFile()
 		{
-			var readFile = new ReadDrinksFromCSV();
-			List<Drink> drinks = readFile.ProcessFile("Files/Drinks.csv");
+			var readFile = new ReadDrinksFromCSV("Files/Drinks.csv");
+			List<Drink> drinks = readFile.drinks;
 
 			foreach (var drink in drinks)
 			{
-				_drinkService.CreateDrink(drink);
+				_drinkService.Create(drink);
 				CreatedAtRoute("GetDrink", new { id = drink.Id.ToString() }, drink);
 			}
 
@@ -62,14 +64,14 @@ namespace WEBApi.Controllers
 		[HttpPut("{id:length(24)}")]
 		public IActionResult UpdateDrink(string id, Drink newDrink)
 		{
-			var drink = _drinkService.GetDrinkById(id);
+			var drink = _drinkService.GetById(id);
 
 			if (drink == null)
 			{
 				return NotFound();
 			}
 
-			_drinkService.UpdateDrink(id, newDrink);
+			_drinkService.Update(id, newDrink);
 
 			return NoContent();
 		}
@@ -77,14 +79,14 @@ namespace WEBApi.Controllers
 		[HttpDelete("{id:length(24)}")]
 		public IActionResult DeleteDrinkById(string id)
 		{
-			var drink = _drinkService.GetDrinkById(id);
+			var drink = _drinkService.GetById(id);
 
 			if (drink == null)
 			{
 				return NotFound();
 			}
 
-			_drinkService.RemoveDrinkById(drink.Id);
+			_drinkService.Remove(drink.Id);
 
 			return NoContent();
 		}
