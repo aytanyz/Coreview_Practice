@@ -12,10 +12,10 @@ namespace WEBApi.Controllers
     [ApiController]
     public class QueryController : ControllerBase
     {
-        private readonly IServiceRepository<Drink> _drinkService;
-        private readonly IServiceRepository<Order> _orderService;
+        private readonly IDrinkService _drinkService;
+        private readonly IOrderService _orderService;
 
-        public QueryController(DrinkService drinkService, OrderService orderService)
+        public QueryController(IDrinkService drinkService, IOrderService orderService)
         {
             _drinkService = drinkService;
             _orderService = orderService;

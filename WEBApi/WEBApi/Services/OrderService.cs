@@ -1,40 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using MongoDB.Driver;
 using WEBApi.Models;
+using WEBApi.Repositories.Orders;
+
 
 namespace WEBApi.Services
 {
-    public class OrderService : IServiceRepository<Order>
+    public class OrderService : IOrderService
     {
-        private readonly IMongoCollection<Order> _orders;
+        private readonly IOrdersRepository _ordersRepository;
 
-        public OrderService()
+        public OrderService(IOrdersRepository ordersRepository)
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("MyDB");
-
-            _orders = database.GetCollection<Order>("Orders");
+            _ordersRepository = ordersRepository;
         }
 
         public List<Order> GetAll() =>
-            _orders.Find(order => true).ToList();
+            _ordersRepository.GetAll();
 
         public Order GetById(string id) =>
-            _orders.Find<Order>(order => order.Id == id).FirstOrDefault();
+            _ordersRepository.GetById(id);
 
-        public Order Create(Order order)
+        public void Create(Order order)
         {
-            _orders.InsertOne(order);
-            return order;
+            _ordersRepository.Create(order);
         }
 
         public void Update(string id, Order newOrder) =>
-            _orders.ReplaceOne(order => order.Id == id, newOrder);
+            _ordersRepository.Update(id, newOrder);
 
         public void Remove(string id) =>
-            _orders.DeleteOne(order => order.Id == id);      
+            _ordersRepository.Remove(id);
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using WEBApi.Models;
 using WEBApi.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +8,11 @@ namespace WEBApi.Controllers
 {
 	[Route("[controller]")]
 	[ApiController]
-	public class MongoDBDiscountCodesController : ControllerBase
+	public class DiscountCodesController : ControllerBase
     {
-        private readonly IServiceRepository<DiscountCode> _discountCodeService;
+        private readonly IDiscountCodeService _discountCodeService;
         
-        public MongoDBDiscountCodesController(DiscountCodeService discountCodeService)
+        public DiscountCodesController(IDiscountCodeService discountCodeService)
         {
             _discountCodeService = discountCodeService;
         }

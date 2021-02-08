@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
-using System;
 using System.Collections.Generic;
 using WEBApi.Models;
 using WEBApi.Services;
@@ -9,11 +7,11 @@ namespace WEBApi.Controllers
 {
 	[Route("[controller]")]
 	[ApiController]
-	public class MongoDBDrinksController : ControllerBase
+	public class DrinksController : ControllerBase
     {
 		private readonly IDrinkService _drinkService;			
 
-		public MongoDBDrinksController(IDrinkService drinkService)
+		public DrinksController(IDrinkService drinkService)
         {
 			_drinkService = drinkService;
 			//(IServiceRepository<Drink>)RepositoryFactory.GetRepository("drink");

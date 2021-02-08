@@ -10,12 +10,12 @@ namespace WEBApi.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class MongoDBOrdersController : ControllerBase
+    public class OrdersController : ControllerBase
     {
-        private readonly IServiceRepository<Order> _orderService;
-        private readonly IServiceRepository<Drink> _drinkService;
+        private readonly IOrderService _orderService;
+        private readonly IDrinkService _drinkService;
 
-        public MongoDBOrdersController(OrderService orderService, DrinkService drinkService)
+        public OrdersController(IOrderService orderService, IDrinkService drinkService)
         {
             _orderService = orderService;
             _drinkService = drinkService;
@@ -41,13 +41,6 @@ namespace WEBApi.Controllers
         [HttpPost]
         public ActionResult<Order> Create(Order order)
         {
-            order.OrderStatus = Status.Created;
-
-            if (order.DiscountCodeId != null)
-                order.DiscountCodeUsed = true;
-            else
-                order.DiscountCodeUsed = false;
-
             // creating new order
             _orderService.Create(order);
 
@@ -76,7 +69,7 @@ namespace WEBApi.Controllers
 
             return NoContent();
         }
-
+/*
         [HttpDelete("{id:length(24)}/canceled")]
         public IActionResult CanceleOrder(string id)
         {
@@ -94,13 +87,10 @@ namespace WEBApi.Controllers
                 drinkToEdit.AviableNumbersOfDrink += drink.NumbersOfDrink;
                 _drinkService.Update(drink.DrinkId, drinkToEdit);
             }
-
-            // _orderService.RemoveOrderById(order.Id);
-            order.OrderStatus = Status.Canceled;
             _orderService.Update(id, order);
 
             return NoContent();
-        }
+        }*/
 
 
         [HttpDelete("{id:length(24)}")]

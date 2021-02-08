@@ -1,38 +1,34 @@
-﻿using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using WEBApi.Models;
+using WEBApi.Repositories.Drinks;
 
 namespace WEBApi.Services
 {
     public class DrinkService : IDrinkService
     {
-        private readonly IMongoCollection<Drink> _drinks; 
+        private readonly IDrinksRepository _drinksRepository;
 
-        public DrinkService(IMongoCollection<Drink> drink)
+        public DrinkService(IDrinksRepository drinksRepository)
         {
-            _drinks = drink;
+            _drinksRepository = drinksRepository;
         }
 
         public List<Drink> GetAll() =>
-            _drinks.Find(drink => true).ToList();
+            _drinksRepository.GetAll();
 
         public Drink GetById(string id) =>
-            _drinks.Find<Drink>(drink => drink.Id == id).FirstOrDefault();
+            _drinksRepository.GetById(id);
 
-        public Drink Create(Drink drink)
+        public void Create(Drink drink)
         {
-            _drinks.InsertOne(drink);
-            return drink;
+            _drinksRepository.Create(drink);
         }
 
         public void Update(string id, Drink newDrink) =>
-            _drinks.ReplaceOne(drink => drink.Id == id, newDrink);
+            _drinksRepository.Update(id, newDrink);
 
         public void Remove(string id) =>
-            _drinks.DeleteOne(drink => drink.Id == id);
+            _drinksRepository.Remove(id);
 
     }
 }

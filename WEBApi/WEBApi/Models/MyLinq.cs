@@ -31,7 +31,7 @@ namespace WEBApi.Models
             {
                 foreach (var drink in order.OrderedDrinks)
                 {
-                    yield return new DrinksFromOrder(order.Id, new OrderedDrink(drink.DrinkId, drink.NumbersOfDrink)); 
+                    yield return new DrinksFromOrder(order.Id, new OrderedDrink(drink.DrinkId, drink.NumbersOfDrink, drink.DrinkName, drink.DrinkPrice)); 
                 }
             }
         }

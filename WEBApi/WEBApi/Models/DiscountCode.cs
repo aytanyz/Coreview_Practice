@@ -7,14 +7,10 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace WEBApi.Models
 {
-    public class DiscountCode
+    public class DiscountCode : EntityBase
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
         public string Code { get; set; }
         public int DiscountPercentage { get; set; }
-        //public bool IsUsed { get; set; }
 
         public DiscountCode()
         {
