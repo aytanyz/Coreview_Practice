@@ -10,7 +10,6 @@
         {
 
         }
-
         public Drink(string drinkName, int aviableNumbersOfDrink, double price)
         {
             DrinkName = drinkName;

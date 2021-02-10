@@ -21,7 +21,7 @@ namespace WEBApi.Controllers
 			_drinkService.GetAll();
 
 		[HttpGet("{id:length(24)}", Name = "GetDrink")]
-		public ActionResult<Drink> Get(string id)
+		public ActionResult<Drink> GetDrink(string id)
 		{
 			var drink = _drinkService.GetById(id);
 
