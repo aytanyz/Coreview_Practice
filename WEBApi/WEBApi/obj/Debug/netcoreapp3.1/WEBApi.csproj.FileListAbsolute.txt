@@ -229,4 +229,10 @@ C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\Microsoft.
 C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Configuration.dll
 C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Console.dll
 C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\Autofac.dll
+C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\Autofac.Extras.Moq.dll
+C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\Castle.Core.dll
+C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\Moq.dll
+C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
+C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\runtimes\linux-mips64\native\libe_sqlite3.so
 C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\obj\Debug\netcoreapp3.1\WEBApi.csprojAssemblyReference.cache

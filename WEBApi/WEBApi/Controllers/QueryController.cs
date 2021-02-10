@@ -22,7 +22,7 @@ namespace WEBApi.Controllers
         }
 
         [HttpGet("drinks/numberofaviableamount/lessthan/{amount}")]
-        public ActionResult<List<Drink>> GetAllDrinks(int amount)
+        public ActionResult<List<Drink>> GetAllDrinksWhereNumbersOfDrinkIsLessThan(int amount)
         {
             var drinks = _drinkService.GetAll()
                                       .Where(d => d.AviableNumbersOfDrink < amount)

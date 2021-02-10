@@ -14,7 +14,6 @@ namespace WEBApi.Controllers
 		public DrinksController(IDrinkService drinkService)
         {
 			_drinkService = drinkService;
-			//(IServiceRepository<Drink>)RepositoryFactory.GetRepository("drink");
 		}
 
 		[HttpGet]
@@ -42,20 +41,20 @@ namespace WEBApi.Controllers
 		}
 
 		// ---------------------add from file------------------------------
-		[HttpPost("fromfile")]
-		public IActionResult AddFromFile()
-		{
-			var readFile = new ReadDrinksFromCSV("Files/Drinks.csv");
-			List<Drink> drinks = readFile.drinks;
+		//[HttpPost("fromfile")]
+		//public IActionResult AddFromFile()
+		//{
+		//	var readFile = new ReadDrinksFromCSV("Files/Drinks.csv");
+		//	List<Drink> drinks = readFile.drinks;
 
-			foreach (var drink in drinks)
-			{
-				_drinkService.Create(drink);
-				CreatedAtRoute("GetDrink", new { id = drink.Id.ToString() }, drink);
-			}
+		//	foreach (var drink in drinks)
+		//	{
+		//		_drinkService.Create(drink);
+		//		CreatedAtRoute("GetDrink", new { id = drink.Id.ToString() }, drink);
+		//	}
 
-			return NoContent();
-		}
+		//	return NoContent();
+		//}
 		// ----------------------------------------------------------------
 
 
