@@ -18,12 +18,12 @@ namespace WEBApi.Controllers
         }
 
 		[HttpGet]
-		public ActionResult<List<DiscountCode>> GetAllDrinks() =>
+		public ActionResult<List<DiscountCode>> GetAllDiscountCodes() =>
 			_discountCodeService.GetAll();
 
 		//[HttpGet("{id:length(24)}", Name = "GetDrink")]
 		[HttpGet("{id}", Name = "GetDiscountCode")]
-		public ActionResult<DiscountCode> Get(string id)
+		public ActionResult<DiscountCode> GetDiscountCode(string id)
 		{
 			var discountCode = _discountCodeService.GetById(id);
 
@@ -44,24 +44,24 @@ namespace WEBApi.Controllers
 		}
 
 		// ---------------------add from file------------------------------
-		[HttpPost("fromfile")]
-		public IActionResult AddFromFile()
-		{
-			var readFile = new ReadDiscountCodesFromCSV();
-			List <DiscountCode> discountCodes = readFile.ProcessFile("Files/DiscountCodes.csv");
+		//[HttpPost("fromfile")]
+		//public IActionResult AddFromFile()
+		//{
+		//	var readFile = new ReadDiscountCodesFromCSV();
+		//	List <DiscountCode> discountCodes = readFile.ProcessFile("Files/DiscountCodes.csv");
 
-			foreach (var discountCode in discountCodes)
-			{
-				_discountCodeService.Create(discountCode);
-				CreatedAtRoute("GetDrink", new { id = discountCode.Id.ToString() }, discountCode);
-			}
+		//	foreach (var discountCode in discountCodes)
+		//	{
+		//		_discountCodeService.Create(discountCode);
+		//		CreatedAtRoute("GetDrink", new { id = discountCode.Id.ToString() }, discountCode);
+		//	}
 
-			return NoContent();
-		}
+		//	return NoContent();
+		//}
 		// ----------------------------------------------------------------
 
 		[HttpPut("{id:length(24)}")]
-		public IActionResult Update(string id, DiscountCode newDiscountCode)
+		public IActionResult UpdateDiscountCode(string id, DiscountCode newDiscountCode)
 		{
 			var book = _discountCodeService.GetById(id);
 
@@ -76,7 +76,7 @@ namespace WEBApi.Controllers
 		}
 
 		[HttpDelete("{id:length(24)}")]
-		public IActionResult Delete(string id)
+		public IActionResult DeleteDiscountCode(string id)
 		{
 			var discountCode = _discountCodeService.GetById(id);
 

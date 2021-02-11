@@ -26,7 +26,7 @@ namespace WEBApi.Controllers
             _orderService.GetAll();
 
         [HttpGet("{id:length(24)}", Name = "GetOrder")]
-        public ActionResult<Order> Get(string id)
+        public ActionResult<Order> GetOrder(string id)
         {
             var order = _orderService.GetById(id);
 
@@ -39,7 +39,7 @@ namespace WEBApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Order> Create(Order order)
+        public ActionResult<Order> CreateOrder(Order order)
         {
             // creating new order
             _orderService.Create(order);
@@ -56,7 +56,7 @@ namespace WEBApi.Controllers
         }
 
         [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, Order newOrder)
+        public IActionResult UpdateOrder(string id, Order newOrder)
         {
             var book = _orderService.GetById(id);
 

@@ -76,7 +76,7 @@ namespace WEBApi.Test.Controllers
         }
 
         [Test]
-        public void When_There_Is_No_Drink_GetAllDrink_Mehtod_Should_Return_Null()
+        public void When_There_Is_No_Drink_GetAllDrinks_Mehtod_Should_Return_Null()
         {
             //Arrange
             List<Drink> mockedResult = null;
