@@ -19,10 +19,8 @@ namespace WEBApi.Services
         public Drink GetById(string id) =>
             _drinksRepository.GetById(id);
 
-        public void Create(Drink drink)
-        {
+        public void Create(Drink drink) =>
             _drinksRepository.Create(drink);
-        }
 
         public void Update(string id, Drink newDrink) =>
             _drinksRepository.Update(id, newDrink);
