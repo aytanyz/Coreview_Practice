@@ -5,11 +5,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using WEBApi.Models;
+using WEBApi.Models.Validators;
 using Microsoft.Extensions.Options;
 using WEBApi.Services;
 using WEBApi.Repositories.Drinks;
 using WEBApi.Repositories.Orders;
 using WEBApi.Repositories.DiscountCodes;
+using Microsoft.AspNetCore.Http;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 
 namespace WEBApi
 {
@@ -25,6 +29,14 @@ namespace WEBApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc(setupAction =>
+            {
+
+            }).AddFluentValidation();
+
+            services.AddTransient<IValidator<Drink>, DrinkValidator>();
+            services.AddTransient<IValidator<string>, IdValidator>();
+
             services.Configure<DatabaseSettings>(
                 Configuration.GetSection(nameof(DatabaseSettings)));
 
@@ -61,6 +73,17 @@ namespace WEBApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler(appBuilder =>
+                {
+                    appBuilder.Run(async c =>
+                    {
+                        c.Response.StatusCode = 500;
+                        await c.Response.WriteAsync("Something went wrong, try again later.");
+                    });
+                });
             }
 
             app.UseHttpsRedirection();

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "RdJuN3s/lE8BmtbNvQxjpGv5sBaQnnfSo4SkXJRgTq8XCzv5K669IhvcTjJEQl3Tlo/YR8BW1TcWzLLjpgJJMA==",
+  "dgSpecHash": "UmN4EYOO1spJVNvhM1Eg2cEoNGyAJi7tYiJmFKH/90xmbvKKQx5MSIveT6j9fvhZqBdsIleBDOps+bLgBtnnRA==",
   "success": true,
   "projectFilePath": "C:\\Users\\ayten\\Desktop\\Coreview\\WebApi\\WEBApi\\WEBApi.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,9 @@
     "C:\\Users\\ayten\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\ayten\\.nuget\\packages\\castle.core\\4.0.0\\castle.core.4.0.0.nupkg.sha512",
     "C:\\Users\\ayten\\.nuget\\packages\\dnsclient\\1.3.1\\dnsclient.1.3.1.nupkg.sha512",
+    "C:\\Users\\ayten\\.nuget\\packages\\fluentvalidation\\9.5.1\\fluentvalidation.9.5.1.nupkg.sha512",
+    "C:\\Users\\ayten\\.nuget\\packages\\fluentvalidation.aspnetcore\\9.5.1\\fluentvalidation.aspnetcore.9.5.1.nupkg.sha512",
+    "C:\\Users\\ayten\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\9.5.1\\fluentvalidation.dependencyinjectionextensions.9.5.1.nupkg.sha512",
     "C:\\Users\\ayten\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.7\\microsoft.aspnet.mvc.5.2.7.nupkg.sha512",
     "C:\\Users\\ayten\\.nuget\\packages\\microsoft.aspnet.razor\\3.2.7\\microsoft.aspnet.razor.3.2.7.nupkg.sha512",
     "C:\\Users\\ayten\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",

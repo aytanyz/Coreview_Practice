@@ -47,7 +47,7 @@ namespace WEBApi.Test.Controllers
         }
 
         [Test]
-        public void When_Ivoking_GetAllDiscountCodes_It_Should_Return_All_DiscountCodes()
+        public void When_Invoking_GetAllDiscountCodes_It_Should_Return_All_DiscountCodes()
         {
             //Arrange
             var mockedResult = CreateDiscountCodesMockData();

@@ -236,3 +236,6 @@ C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\Moq.dll
 C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
 C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\runtimes\linux-mips64\native\libe_sqlite3.so
 C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\obj\Debug\netcoreapp3.1\WEBApi.csprojAssemblyReference.cache
+C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\FluentValidation.dll
+C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\FluentValidation.AspNetCore.dll
+C:\Users\ayten\Desktop\Coreview\WebApi\WEBApi\bin\Debug\netcoreapp3.1\FluentValidation.DependencyInjectionExtensions.dll

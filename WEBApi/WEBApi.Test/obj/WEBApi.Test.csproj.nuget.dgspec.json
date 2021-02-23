@@ -48,6 +48,14 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "MSTest.TestAdapter": {
+              "target": "Package",
+              "version": "[2.1.2, )"
+            },
+            "MSTest.TestFramework": {
+              "target": "Package",
+              "version": "[2.1.2, )"
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[16.5.0, )"
@@ -130,6 +138,14 @@
             "Autofac.Extras.Moq": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[9.5.1, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[9.5.1, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",

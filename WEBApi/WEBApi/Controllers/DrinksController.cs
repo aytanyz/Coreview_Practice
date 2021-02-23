@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using WEBApi.Models;
+using WEBApi.Models.Validators;
 using WEBApi.Services;
 
 namespace WEBApi.Controllers
@@ -16,13 +18,26 @@ namespace WEBApi.Controllers
 			_drinkService = drinkService;
 		}
 
+		[HttpGet("error_test")]
+		public ActionResult<Drink> ErrorTest()
+		{
+			throw new Exception("testing execution");
+		}
+
 		[HttpGet]
 		public ActionResult<List<Drink>> GetAllDrinks() =>
 			_drinkService.GetAll();
 
+
 		[HttpGet("{id:length(24)}", Name = "GetDrink")]
 		public ActionResult<Drink> GetDrink(string id)
 		{
+			var idValidator = new IdValidator();
+			var resultIdValidator = idValidator.Validate(id);
+
+			if (!resultIdValidator.IsValid)
+				return BadRequest();
+
 			var drink = _drinkService.GetById(id);
 
 			if (drink == null)
@@ -36,6 +51,12 @@ namespace WEBApi.Controllers
 		[HttpPost]
 		public ActionResult<Drink> CreateDrink(Drink drink)
 		{
+			var drinkValidator = new DrinkValidator();
+			var resultValidator = drinkValidator.Validate(drink);
+
+			if (!resultValidator.IsValid)
+				return BadRequest();
+
 			_drinkService.Create(drink);
 			return CreatedAtRoute("GetDrink", new { id = drink.Id.ToString() }, drink);
 		}
@@ -61,6 +82,14 @@ namespace WEBApi.Controllers
 		[HttpPut("{id:length(24)}")]
 		public IActionResult UpdateDrink(string id, Drink newDrink)
 		{
+			newDrink.Id = id;
+
+			var drinkValidator = new DrinkValidator();
+			var resultValidator = drinkValidator.Validate(newDrink);
+
+			if (!resultValidator.IsValid)
+				return BadRequest();
+
 			var drink = _drinkService.GetById(id);
 
 			if (drink == null)
@@ -76,6 +105,12 @@ namespace WEBApi.Controllers
 		[HttpDelete("{id:length(24)}")]
 		public IActionResult DeleteDrinkById(string id)
 		{
+			var idValidator = new IdValidator();
+			var resultValidator = idValidator.Validate(id);
+
+			if (!resultValidator.IsValid)
+				return BadRequest();
+
 			var drink = _drinkService.GetById(id);
 
 			if (drink == null)

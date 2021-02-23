@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using WEBApi.Models;
 using WEBApi.Repositories.Drinks;
 
@@ -16,8 +17,11 @@ namespace WEBApi.Services
         public List<Drink> GetAll() =>
             _drinksRepository.GetAll();
 
-        public Drink GetById(string id) =>
-            _drinksRepository.GetById(id);
+        public Drink GetById(string id)
+        {
+            return _drinksRepository.GetById(id);
+        }
+            
 
         public void Create(Drink drink) =>
             _drinksRepository.Create(drink);

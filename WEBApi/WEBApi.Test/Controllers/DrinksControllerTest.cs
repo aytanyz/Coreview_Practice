@@ -6,6 +6,7 @@ using WEBApi.Models;
 using WEBApi.Services;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace WEBApi.Test.Controllers
 {
@@ -115,10 +116,11 @@ namespace WEBApi.Test.Controllers
         }
 
         [Test]
-        public void If_There_Is_No_Drink_With_The_Same_Id_GetDrink_Should_Return_NotFound()
+        public void If_There_Is_No_Drink_With_The_Given_Id_GetDrink_Should_Return_NotFound()
         {
             //Arrange
             Drink drink = null;
+            string id = "";
 
             _mockDrinkService.Setup(x => x.GetById(It.IsAny<string>()))
                 .Returns(drink);
@@ -126,13 +128,34 @@ namespace WEBApi.Test.Controllers
             var controller = new DrinksController(_mockDrinkService.Object);
 
             //Act
-            var result = controller.GetDrink(It.IsAny<string>());
+            var result = controller.GetDrink(id);
 
             //Assert
             _mockDrinkService.Verify(x => x.GetById(It.IsAny<string>()), Times.Exactly(1));
-            
-            //-------------------------------- ??? ------------------------------
-            //Assert.IsTrue(result is NotFoundResult);
+            Assert.IsTrue(result.Result is NotFoundResult);
+        }
+
+        [Test]
+        public void If_The_Id_Is_Null_GetDrink_Should_Return_BadRequest()
+        {
+            //Arrange
+            string id = null;
+
+            /*_mockDrinkService.Setup(x => x.GetById(id))
+                .Returns(It.IsAny<Drink>());*/
+
+            var controller = new DrinksController(_mockDrinkService.Object);
+
+            //Act
+            try
+            {
+                controller.GetDrink(id);
+            }
+            catch (ArgumentNullException)
+            {
+                //Assert
+                _mockDrinkService.Verify(x => x.GetById(id), Times.Exactly(0));
+            }               
         }
 
         [Test]
@@ -183,30 +206,51 @@ namespace WEBApi.Test.Controllers
         }
 
         [Test]
-        public void When_Invoking_UpdateDrink_The_Update_Method_Should_Never_Been_Invoked()
+        public void When_Invoking_UpdateDrink_With_Id_That_Does_Not_Exist_The_Update_Method_Should_Never_Been_Invoked()
         {
             //Arrange
-            Drink newDrink = null;
-
-
-            _mockDrinkService.Setup(x => x.GetById(It.IsAny<string>()))
-                .Returns(newDrink);
+            Drink drink = new Drink
+            {
+                Id = "006",
+                DrinkName = "Tea",
+                AviableNumbersOfDrink = 20,
+                DrinkPrice = 2.5
+            };
 
             var controller = new DrinksController(_mockDrinkService.Object);
 
             //Act
-            var result = controller.UpdateDrink(It.IsAny<string>(), It.IsAny<Drink>());
+            var result = controller.UpdateDrink(drink.Id, drink);
+
+            //Assert
+            _mockDrinkService.Verify(x => x.Update(drink.Id, drink), Times.Never);
+            Assert.IsTrue(result is NotFoundResult);
+        }
+
+        [Test]
+        public void When_Invoking_UpdateDrink_With_Invalid_Data_The_Update_Method_Should_Never_Been_Invoked()
+        {
+            //Arrange
+            var controller = new DrinksController(_mockDrinkService.Object);
+
+            //Act
 
             //Assert
             _mockDrinkService.Verify(x => x.Update(It.IsAny<string>(), It.IsAny<Drink>()), Times.Never);
-            Assert.IsTrue(result is NotFoundResult);
         }
 
         [Test]
         public void When_Invoking_DeleteDrinkById_The_Remove_Method_Should_Be_Invoked_Once()
         {
             //Arrange
-            var drink = new Drink();
+            Drink drink = new Drink
+            {
+                Id = "001",
+                DrinkName = "Tea",
+                AviableNumbersOfDrink = 20,
+                DrinkPrice = 2.5
+            };
+
             _mockDrinkService.Setup(x => x.GetById(drink.Id))
                 .Returns(drink);
 
@@ -222,22 +266,31 @@ namespace WEBApi.Test.Controllers
         }
 
         [Test]
-        public void When_Invoking_DeleteDrinkById_The_Remove_Method_Should_Never_Been_Invoked()
+        public void When_Invoking_DeleteDrinkById_With_Id_That_Does_Not_Exist_The_Remove_Method_Should_Never_Been_Invoked()
         {
             //Arrange
-            Drink newDrink = null;
-
-            _mockDrinkService.Setup(x => x.GetById(It.IsAny<string>()))
-                .Returns(newDrink);
+            string id = "006";
 
             var controller = new DrinksController(_mockDrinkService.Object);
 
             //Act
-            var result = controller.DeleteDrinkById(It.IsAny<string>());
+            var result = controller.DeleteDrinkById(id);
 
             //Assert
-            _mockDrinkService.Verify(x => x.Update(It.IsAny<string>(), It.IsAny<Drink>()), Times.Never);
+            _mockDrinkService.Verify(x => x.Remove(id), Times.Never);
             Assert.IsTrue(result is NotFoundResult);
+        }
+
+        [Test]
+        public void When_Invoking_DeleteDrinkById_With_Invalid_Data_The_Remove_Method_Should_Never_Been_Invoked()
+        {
+            //Arrange
+            var controller = new DrinksController(_mockDrinkService.Object);
+
+            //Act
+
+            //Assert
+            _mockDrinkService.Verify(x => x.Remove(It.IsAny<string>()), Times.Never);
         }
     }
 }
